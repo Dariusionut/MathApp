@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="~{fragments/main :: head}"></head>
+<body>
+<header th:replace="~{fragments/main :: header}"></header>
+<section class="hero" th:style="'background: url(/images/hero.jpg) no-repeat center ; background-size:cover;'">
+    <section class="container" style="position: relative; z-index: 1">
+        <h3>Role List</h3>
+
+        <form th:action="@{/roles/search}" class="form-inline">
+            <a th:href="@{/roles/new}" class="btn btn-primary btn-sm mb-3 mr-5" style="font-size: 1.5rem">ADD ROLE</a>
+            <input class="form-control mr-sm-2 mb-3" type="search" name="name" placeholder="Search by name"/>
+
+            <button class="btn btn-success mb-3" type="submit"><i class="fas fa-search"></i></button>
+        </form>
+        <hr>
+        <table class="table table-striped table-bordered table-hover table-dark">
+            <thead>
+            <th>Id</th>
+            <th>Role Name</th>
+            <th>Users</th>
+            <th>Action</th>
+            </thead>
+
+            <tbody>
+            <tr th:each="myRole : ${roles}">
+                <td th:text="${myRole.id}"></td>
+                <td th:text="${myRole.name}"></td>
+                <td>
+
+                    <p th:text="None" th:if="${myRole.users.isEmpty()}"></p>
+
+                    <th:block th:unless="${myRole.users.isEmpty()}" th:each="user : ${myRole.users}">
+                        <span th:text="${user.userName} + '; '"></span>
+
+                    </th:block>
+                </td>
+                <td>
+                    <a th:href="@{'/roles/edit/' + ${myRole.id}}" class="btn btn-success fa-1x"><i class="fas fa-edit"></i></a>
+                    <a th:href="@{'/roles/delete/' + ${myRole.id}}" class="btn btn-danger fa-1x"
+                       onclick="if(!(confirm('Are you sure to delete this role?'))) return false">
+                        <i class="fas fa-trash-alt"></i></a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+    </section>
+
+    <footer th:replace="~{fragments/main :: footer}"></footer>
+
+</section>
+</body>
+</html>

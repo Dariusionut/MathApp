@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>[[${title}]]</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+          integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <script src="/js/script.js"></script>
+</head>
+<body>
+<header>
+
+    <nav class="logo">
+        <a th:href="@{/}" class="logo" title="Home">
+            <img th:src="@{/images/logo.png}" alt="Logo">
+        </a>
+
+        <nav sec:authorize="isAuthenticated()" class="navigation user-principal">
+            <div class="dropdown-button">
+                <a th:href="@{'/users/profile/' + ${#httpServletRequest.userPrincipal.getName()}}" class="dropbtn">
+                    <i class="fas fa-user"></i> [[${#request.userPrincipal.principal.username}]]</a>
+                <div class="dropdown-content">
+                    <a sec:authorize="isAuthenticated()" th:href="@{/logout}" title="Sign out"
+                       onclick="if (!(confirm('Are you sure to sign out?'))) return false"><i
+                            class="fas fa-door-open"></i> Sign Out</a>
+                    <a th:href="@{'/users/update/' + ${#httpServletRequest.userPrincipal.getName()}}">
+                        <i class="fas fa-cog"> Edit profile</i></a>
+                </div>
+
+            </div>
+
+
+        </nav>
+    </nav>
+
+
+    <nav class="navigation">
+        <a sec:authorize="isAuthenticated()" th:href="@{/users}"><i class="fas fa-users"></i></a>
+        <a sec:authorize="hasRole('ADMIN')" th:href="@{/roles}"><i class="fas fa-cog"></i></a>
+
+        <a sec:authorize="isAnonymous()" th:href="@{/login}" title="Login"><i class="fas fa-sign-in-alt"></i></a>
+        <a sec:authorize="isAnonymous()" th:href="@{/users/register}" title="New Account"><i
+                class="fas fa-registered"></i></a>
+    </nav>
+
+</header>
+
+<footer style="position: fixed; bottom: 1.5rem; left: 2.5rem; z-index: 1">
+    <p id="details"></p>
+
+
+    <script>
+        class Author {
+            constructor(lName, fName) {
+                this.lName = lName;
+                this.fName = fName;
+            }
+        }
+        const darius = new Author("Tinculescu", "Darius")
+        document.getElementById("details").innerHTML = "Author: " + darius.lName + ' ' + darius.fName;
+    </script>
+</footer>
+
+</body>
+</html>

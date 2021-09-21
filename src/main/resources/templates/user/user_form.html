@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="~{fragments/main :: head}"></head>
+<body>
+<header th:replace="~{fragments/main :: header}"></header>
+<section class="hero" th:style="'background: url(/images/hero.jpg) no-repeat center ; background-size:cover;'">
+    <section class="container" style="position: relative; z-index: 1">
+
+        <h3 th:if="${user.getId() == null}">CREATE NEW ACCOUNT!</h3>
+        <h3 th:unless="${user.getId() == null}">Edit User: [[${user.userName}]]</h3>
+
+        <form th:action="@{/users/save}" method="post" th:object="${user}" enctype="multipart/form-data">
+            <input type="hidden" th:field="*{id}">
+            <div class="mb-3">
+                <label for="username">Username</label>
+                <input type="text" th:field="*{userName}" id="username" placeholder="Username" value="Darius" required
+                       class="form-control col-4">
+            </div>
+
+            <div class="mb-3">
+                <label for="email">Email</label>
+                <input type="email" th:field="*{email}" id="email" placeholder="Email" required
+                       class="form-control col-4">
+            </div>
+
+
+            <div class="mb-3">
+                <div th:if="${user.getId() == null}" >
+                    <label for="pass">Password</label>
+                    <input type="password" th:field="*{password}" placeholder="Password" id="pass"
+                           class="form-control col-4" required>
+                </div>
+                <div th:unless="${user.getId() == null}" >
+                    <label for="editPass">Password</label>
+                    <input type="password" th:field="*{password}" placeholder="Password" id="editPass"
+                           class="form-control col-4">
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label for="fName">First Name</label>
+                <input type="text" th:field="*{firstName}" id="fName" placeholder="First Name" required
+                       class="form-control col-4">
+            </div>
+
+            <div class="mb-3">
+                <label for="lName">Last Name</label>
+                <input type="text" th:field="*{lastName}" id="lName" placeholder="Last Name" required
+                       class="form-control col-4">
+            </div>
+
+            <div th:if="${user.id == null}" class="mb-3">
+                <label for="det">About you</label>
+                <textarea th:field="*{details.info}" id="det"
+                          class="form-control col-4"></textarea>
+            </div>
+
+            <div th:unless="${user.id == null}" class="mb-3">
+                <label for="details">[[${user.userName}]] info</label>
+                <textarea  th:field="*{details.info}" id="details"
+                          class="form-control col-4"></textarea>
+            </div>
+
+            <div sec:authorize="hasAnyRole('ADMIN, EDITOR')" class="mb-3">
+                <label for="roles">Role</label>
+
+                <select th:field="*{roles}" id="roles" class="form-control col-4">
+
+                    <option th:each="role : ${roles}"
+                            th:value="${role.id}"
+                            th:text="${role.name}">
+                    </option>
+
+                </select>
+            </div>
+
+            <div sec:authorize="hasRole('ADMIN')" class="mb-3">
+                <label for="status">Account status</label>
+                <select th:field="*{isEnabled}" class="form-control col-4" id="status" required>
+                    <option th:value="true" th:text="Enabled"></option>
+                    <option th:value="false" th:text="Disabled"></option>
+                </select>
+            </div>
+
+
+            <button type="submit" class="btn btn-success btn-lg">SAVE</button>
+        </form>
+
+    </section>
+
+    <footer th:replace="~{fragments/main :: footer}"></footer>
+
+</section>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="~{fragments/main :: head}"></head>
+<body>
+<header th:replace="~{fragments/main :: header}"></header>
+<section class="hero" th:style="'background: url(/images/hero.jpg) no-repeat center ; background-size:cover;'">
+    <section class="container" style="position: relative; z-index: 1">
+
+        <form class="form-signin" method="post" action="/login" style="max-width: 30rem" name="loginForm" >
+            <h2 class="form-signin-heading mb-5" style="font-size: 4.5rem">Please sign in</h2>
+            <section class="login-form">
+            <p>
+                <label for="username" class="sr-only">Username</label>
+                <input type="text" id="username" name="username" class="form-control" placeholder="Username" required
+                       autofocus>
+                <p id="usernameValid"></p>
+            </p>
+            <p>
+                <label for="password" class="sr-only">Password</label>
+                <input type="password" id="password" name="password" class="form-control" placeholder="Password"
+                       required>
+            </p>
+            <button class="btn btn-lg btn-primary btn-block mb-3" type="submit" name="submit" id="submit">Sign in</button>
+            </section>
+            <hr>
+            <a th:href="@{/users/register}">New Account? Register!</a>
+
+        </form>
+
+
+    </section>
+
+    <footer th:replace="~{fragments/main :: footer}"></footer>
+
+</section>
+
+<script src="/js/script.js"></script>
+</body>
+</html>

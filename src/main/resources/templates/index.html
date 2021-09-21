@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="~{fragments/main :: head}"></head>
+<body>
+<header th:replace="~{fragments/main :: header}"></header>
+
+<section class="hero" th:style="'background: url(/images/hero.jpg) no-repeat center ; background-size:cover; '">
+
+    <section class="greetings">
+        <h2 sec:authorize="isAnonymous()" th:text="${welcome + '!'}" class="welcome"></h2>
+        <h2 sec:authorize="isAuthenticated()" class="welcome-user" >
+            [[${welcome}]], <b><i>[[${#httpServletRequest.userPrincipal.getName()}]]</i></b>!</h2>
+        <h3 sec:authorize="isAuthenticated()" class="welcome-user" >[[${welcomeUser}]] </h3>
+
+    </section>
+
+    <footer th:replace="~{fragments/main :: footer}"></footer>
+
+</section>
+
+</body>
+</html>

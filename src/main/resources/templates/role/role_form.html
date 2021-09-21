@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/main :: head}"></head>
+<body>
+<header th:replace="~{fragments/main :: header}"></header>
+<section class="hero" th:style="'background: url(/images/hero.jpg) no-repeat center ; background-size:cover;'">
+    <section class="container" style="position: relative; z-index: 1">
+
+        <h3 th:if="${role.getId() == null}">Add Role</h3>
+        <h3 th:unless="${role.getId() == null}">Edit Role</h3>
+
+        <form th:action="@{/roles/save}" method="post" th:object="${role}">
+            <input type="hidden" th:field="*{id}">
+            <div class="mb-3">
+                <label for="roleName">Role's name</label>
+                <input type="text" th:field="*{name}" id="roleName" placeholder="Role's name"
+                       class="form-control col-4">
+            </div>
+
+            <button type="submit" class="btn btn-success btn-lg">SAVE</button>
+        </form>
+
+    </section>
+
+    <footer th:replace="~{fragments/main :: footer}"></footer>
+
+</section>
+
+<script src="/js/script.js"></script>
+</body>
+</html>
