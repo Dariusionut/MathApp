@@ -56,6 +56,7 @@ public class UserService extends MyService<User, UserRepository> {
         super.save(user);
     }
 
+    @Override
     public void saveAll(List<User> users) {
 
         for (User user : users) {
@@ -74,7 +75,7 @@ public class UserService extends MyService<User, UserRepository> {
             }
         }
 
-        super.getRepository().saveAll(users);
+        super.saveAll(users);
     }
 
     @Override
@@ -86,10 +87,10 @@ public class UserService extends MyService<User, UserRepository> {
         super.deleteById(id);
     }
 
+    @Override
     public void deleteAll(List<User> users) {
-        users.addAll(super.findAll());
 
-        super.getRepository().deleteAll(users);
+        super.deleteAll(users);
     }
 
     public User getUserByEmail(String email) {

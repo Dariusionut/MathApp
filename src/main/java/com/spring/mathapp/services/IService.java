@@ -10,5 +10,9 @@ public interface IService<T>{
 
     void save(T entity);
 
+    void saveAll(List<T> list);
+
     void deleteById(Long id);
+
+    void deleteAll(List<T> list);
 }

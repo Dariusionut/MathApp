@@ -35,9 +35,17 @@ class UserServiceTest {
     }
 
     @Test
-    void createUser() {
-        assertNotNull(user.getId(), "User not created!");
-        assertNotNull(user2.getId(), "User 2 not created!");
+    void save() {
+        User testUser = new User("testMyUser", "pass", "testing@test.test", "test",
+                "test", null, null, null);
+        userService.save(testUser);
+
+        assertNotNull(testUser, "Cannot save user!");
+    }
+
+    @Test
+    void saveAllTest() {
+        assertTrue(user.getId() != null && user2.getId() != null, "User not created!");
     }
 
     @Test
