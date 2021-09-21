@@ -91,7 +91,7 @@ public class UserController {
     @PreAuthorize("#userName == principal.username")
     public String getUserProfile(@PathVariable("userName") String userName, Model model) {
         model.addAttribute("user", userService.findByUsername(userName));
-        model.addAttribute("title", "#request.userPrincipal.principal.username");
+        model.addAttribute("title", "Profile");
 
         return "user/user_profile";
     }

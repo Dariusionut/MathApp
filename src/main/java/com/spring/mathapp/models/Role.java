@@ -29,8 +29,12 @@ public class Role {
             inverseJoinColumns = @JoinColumn(name = "user_id"))
     private List<User> users;
 
+    public String getName() {
+        return name.toUpperCase();
+    }
+
     @Override
     public String toString() {
-        return name;
+        return name.toUpperCase();
     }
 }

@@ -13,16 +13,14 @@ public class RoleService extends MyService<Role, RoleRepository> {
 
     @Override
     public void save(Role role) {
-        if (role.getName() == role.getName().toLowerCase()){
-            role.setName(role.getName().toUpperCase());
-        }
+        role.setName(role.getName());
 
         super.save(role);
     }
 
     @Override
     public Role findById(Long id) {
-        return super.getRepository().findById(id).orElseThrow(()-> new MyRoleNotFoundException("Role Not Found!"));
+        return super.getRepository().findById(id).orElseThrow(() -> new MyRoleNotFoundException("Role Not Found!"));
     }
 
     @Override
@@ -36,33 +34,26 @@ public class RoleService extends MyService<Role, RoleRepository> {
 
     public void setDefaultRoles() {
         Role roleUser, roleEditor, roleAdmin;
-        roleUser = new Role("USER");
+        roleUser = new Role("uSeR");
         roleEditor = new Role("EDITOR");
         roleAdmin = new Role("ADMIN");
 
-        Optional<Role> userRole = Optional.ofNullable(super.getRepository().findRoleByName("USER"));
-        Optional<Role> editorRole = Optional.ofNullable(super.getRepository().findRoleByName("EDITOR"));
-        Optional<Role> adminRole = Optional.ofNullable(super.getRepository().findRoleByName("ADMIN"));
+        List<Role> roles = List.of(roleUser, roleEditor, roleAdmin);
 
-        if (userRole.isEmpty()){
-            super.save(roleUser);
+        for (Role role : roles) {
+            role.setName(role.getName());
+            Optional<Role> roleOptional = Optional.ofNullable(super.getRepository().findRoleByName(role.getName()));
+            if (roleOptional.isEmpty()) {
+                super.save(role);
+            }
         }
-
-        if (editorRole.isEmpty()){
-            super.save(roleEditor);
-        }
-
-        if (adminRole.isEmpty()){
-            super.save(roleAdmin);
-        }
-
     }
 
-    public Role findRoleByName(String roleName){
+    public Role findRoleByName(String roleName) {
         return super.getRepository().findRoleByName(roleName);
     }
 
-    public List<Role> searchBy(String name){
+    public List<Role> searchBy(String name) {
         List<Role> results;
         if (name != null && name.trim().length() > 0) {
             results = super.getRepository().findByNameContainsOrNameContainingAllIgnoreCase(name, name);

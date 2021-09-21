@@ -31,7 +31,7 @@ class UserConfigTest {
     }
 
     @Test
-    void userRunner() {
+    void userRunnerTest() {
         assertTrue(dariusUser && alexUser && bannedUser && editorUser, "userRunner does not work!");
     }
 }

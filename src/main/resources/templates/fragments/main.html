@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
           integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
     <link rel="stylesheet" th:href="@{/css/style.css}">
-    <script src="/js/script.js"></script>
+
 </head>
 <body>
 <header>
@@ -61,9 +61,11 @@
                 this.fName = fName;
             }
         }
+
         const darius = new Author("Tinculescu", "Darius")
         document.getElementById("details").innerHTML = "Author: " + darius.lName + ' ' + darius.fName;
     </script>
+    <script src="/js/script.js"></script>
 </footer>
 
 </body>

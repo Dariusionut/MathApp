@@ -40,12 +40,13 @@ class UserConfig {
 
             List<User> defaultUsers = List.of(darius96, alex98, bannedUser, editorUser);
 
-            for (User user : defaultUsers) {
+            defaultUsers.forEach(user -> {
                 Optional<User> userOptional = Optional.ofNullable(userService.findByUsername(user.getUserName()));
-                if (userOptional.isEmpty()){
+                if (userOptional.isEmpty()) {
                     userService.save(user);
                 }
-            }
+            });
+
         };
     }
 }
