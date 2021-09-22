@@ -7,6 +7,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -39,6 +40,10 @@ public class CustomUserDetails implements UserDetails, Serializable {
         return user.getPassword();
     }
 
+    public Long getId() {
+        return user.getId();
+    }
+
     @Override
     public String getUsername() {
         return user.getUserName();
@@ -50,6 +55,14 @@ public class CustomUserDetails implements UserDetails, Serializable {
 
     public String getFullName() {
         return user.getFullName();
+    }
+
+    public LocalDate getDob() {
+        return user.getDob();
+    }
+
+    public Integer getAge() {
+        return user.getAge();
     }
 
     public String getDetails() {

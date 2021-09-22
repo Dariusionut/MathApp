@@ -9,6 +9,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.util.Assert;
 
 import javax.transaction.Transactional;
+import java.time.LocalDate;
+import java.time.Month;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -19,17 +21,19 @@ class UserServiceTest {
 
     private User user;
     private User user2;
+    LocalDate age = LocalDate.of(1990, Month.JUNE, 22);
 
     @Autowired
     private UserService userService;
 
     @BeforeEach
     void setUp() {
+
         user = new User("userTest", "passTest", "test@gmail.com", "nameTest",
-                "lNameTest", null, null, null);
+                "lNameTest", age, null, null, null, null);
 
         user2 = new User("user2Test", "pass2Test", "test2@gmail.com", "name2Test",
-                "lName2Test", null, null, null);
+                "lName2Test", age, null, null, null, null);
 
         userService.saveAll(List.of(user, user2));
     }
@@ -37,7 +41,7 @@ class UserServiceTest {
     @Test
     void save() {
         User testUser = new User("testMyUser", "pass", "testing@test.test", "test",
-                "test", null, null, null);
+                "test", age, null, null, null, null);
         userService.save(testUser);
 
         assertNotNull(testUser, "Cannot save user!");

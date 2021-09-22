@@ -6,7 +6,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <body>
 <header th:replace="~{fragments/main :: header}"></header>
 <section class="hero" th:style="'background: url(/images/hero.jpg) no-repeat center ; background-size:cover;'">
-    <section class="container" style="position: relative; z-index: 1">
+    <section class="container" style="position: relative; z-index: 1; font-size: 2rem">
 
         <h3 th:if="${user.getId() == null}">CREATE NEW ACCOUNT!</h3>
         <h3 th:unless="${user.getId() == null}">Edit User: [[${user.userName}]]</h3>
@@ -48,6 +48,12 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
             <div class="mb-3">
                 <label for="lName">Last Name</label>
                 <input type="text" th:field="*{lastName}" id="lName" placeholder="Last Name" required
+                       class="form-control col-4">
+            </div>
+
+            <div class="mb-3">
+                <label for="dob">Date of birth</label>
+                <input type="date" th:field="*{dob}" id="dob" placeholder="Date of birth" required
                        class="form-control col-4">
             </div>
 

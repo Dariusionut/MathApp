@@ -33,6 +33,7 @@ public class UserService extends MyService<User, UserRepository> {
     public void save(User user) {
         user.setEncodedPassword(user.getPassword());
         user.getFullName();
+        user.setAge(user.getAge());
 
         if (user.getIsEnabled() == null) {
             user.setIsEnabled(true);
@@ -61,6 +62,7 @@ public class UserService extends MyService<User, UserRepository> {
 
         for (User user : users) {
             user.setEncodedPassword(user.getPassword());
+            user.setAge(user.getAge());
             if (user.getRoles() == null) {
                 Role userRole = roleService.findRoleByName("USER");
                 user.setRoles(Set.of(userRole));

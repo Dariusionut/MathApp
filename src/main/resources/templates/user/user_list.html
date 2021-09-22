@@ -29,6 +29,7 @@
                 <th>Username</th>
                 <th>Email</th>
                 <th>Full name</th>
+                <th>Age</th>
                 <th>Details</th>
                 <th>Role(s)</th>
                 <th>Action</th>
@@ -45,6 +46,7 @@
 
                 <td th:text="${user.email}"></td>
                 <td th:text="${user.fullName}"></td>
+                <td th:text="${user.age}"></td>
 
                 <td th:if="${user.getIsEnabled() == true}" th:text="${user.details.info}"></td>
                 <td th:unless="${user.getIsEnabled() == true}" th:text="BANNED" class="banned"></td>

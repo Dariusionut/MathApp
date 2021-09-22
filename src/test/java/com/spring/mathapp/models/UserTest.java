@@ -5,6 +5,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import java.time.LocalDate;
+import java.time.Month;
 import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -18,6 +20,7 @@ class UserTest {
 
     @BeforeEach
     void setUp() {
+        LocalDate age = LocalDate.of(1990, Month.JUNE, 22);
         userDetails = new Details();
         userDetails.setId(1L);
         userDetails.setInfo("testDetails!");
@@ -27,7 +30,7 @@ class UserTest {
         userRole.setName("testRole");
 
         user = new User(1L, "testUsername", "testPass", "test@test.com",
-                "firstNameTest", "lastNameTest", true, userDetails, Set.of(userRole));
+                "firstNameTest", "lastNameTest", age, null, true, userDetails, Set.of(userRole));
 
     }
 
@@ -68,6 +71,11 @@ class UserTest {
     @Test
     void getLastName() {
         assertNotNull(user.getLastName(), "Cannot get user's lastName!");
+    }
+
+    @Test
+    void getAge() {
+        assertNotNull(user.getAge(), "Cannot get user age!");
     }
 
     @Test

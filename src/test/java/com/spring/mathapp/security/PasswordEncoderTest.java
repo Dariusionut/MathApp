@@ -7,6 +7,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.util.Assert;
 
+import java.time.LocalDate;
+import java.time.Month;
+
 @SpringBootTest
 public class PasswordEncoderTest {
 
@@ -17,7 +20,8 @@ public class PasswordEncoderTest {
     @BeforeEach
     void setUp() {
         encoder = new BCryptPasswordEncoder();
-        user = new User("test", "rawPassword", "test@test.com", "fTest", "lTest");
+        user = new User("test", "rawPassword", "test@test.com", "fTest", "lTest",
+                LocalDate.of(1996, Month.JULY, 26));
 
     }
 
@@ -31,7 +35,7 @@ public class PasswordEncoderTest {
     }
 
     @Test
-    void userPasswordEncodingTest(){
+    void userPasswordEncodingTest() {
         String rawPassword = user.getPassword();
         user.setEncodedPassword(user.getPassword());
         String encodedPass = user.getPassword();

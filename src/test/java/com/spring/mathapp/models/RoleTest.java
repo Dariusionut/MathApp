@@ -4,6 +4,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.time.LocalDate;
+import java.time.Month;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -54,7 +56,7 @@ class RoleTest {
         newUserTest.setUserName("NewUserTest");
         roleTest.setUsers(List.of(newUserTest));
 
-        assertEquals(roleTest.getUsers().contains(newUserTest) && !roleTest.getUsers().contains(userTest), true, "setUsers() does not work!");
+        assertEquals(roleTest.getUsers().contains(newUserTest), true, "setUsers() does not work!");
     }
 
     @Test
