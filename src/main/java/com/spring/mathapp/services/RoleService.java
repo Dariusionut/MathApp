@@ -13,14 +13,15 @@ public class RoleService extends MyService<Role, RoleRepository> {
 
     @Override
     public void save(Role role) {
-        role.setName(role.getName());
+        role.setName(role.getName().toUpperCase());
 
         super.save(role);
     }
 
     @Override
     public Role findById(Long id) {
-        return super.getRepository().findById(id).orElseThrow(() -> new MyRoleNotFoundException("Role Not Found!"));
+
+        return super.getRepository().findById(id).orElseThrow(() -> new MyRoleNotFoundException("Role not found!"));
     }
 
     @Override
@@ -41,7 +42,7 @@ public class RoleService extends MyService<Role, RoleRepository> {
         List<Role> roles = List.of(roleUser, roleEditor, roleAdmin);
 
         for (Role role : roles) {
-            role.setName(role.getName());
+            role.setName(role.getName().toUpperCase());
             Optional<Role> roleOptional = Optional.ofNullable(super.getRepository().findRoleByName(role.getName()));
             if (roleOptional.isEmpty()) {
                 super.save(role);

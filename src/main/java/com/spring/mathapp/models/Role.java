@@ -7,7 +7,6 @@ import java.util.List;
 
 import static javax.persistence.CascadeType.*;
 
-
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -28,10 +27,6 @@ public class Role {
             joinColumns = @JoinColumn(name = "role_id"),
             inverseJoinColumns = @JoinColumn(name = "user_id"))
     private List<User> users;
-
-    public String getName() {
-        return name.toUpperCase();
-    }
 
     @Override
     public String toString() {

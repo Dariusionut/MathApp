@@ -10,7 +10,7 @@
         <h3 th:if="${role.getId() == null}">Add Role</h3>
         <h3 th:unless="${role.getId() == null}">Edit Role</h3>
 
-        <form th:action="@{/roles/save}" method="post" th:object="${role}">
+        <form th:action="@{/roles/add}" method="post" th:object="${role}">
             <input type="hidden" th:field="*{id}">
             <div class="mb-3">
                 <label for="roleName">Role's name</label>
@@ -27,6 +27,5 @@
 
 </section>
 
-<script src="/js/script.js"></script>
 </body>
 </html>

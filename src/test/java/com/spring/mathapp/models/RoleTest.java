@@ -36,7 +36,7 @@ class RoleTest {
 
     @Test
     void getName() {
-        assertEquals(roleTest.getName(), "ROLE", "getName() does not work!");
+        assertEquals(roleTest.getName(), "role", "getName() does not work!");
     }
 
     @Test
@@ -61,7 +61,7 @@ class RoleTest {
 
     @Test
     void testToString() {
-        assertEquals(roleTest.toString(), roleTest.getName(), "roleTest.toString() does not work properly!");
+        assertEquals(roleTest.toString(), roleTest.getName().toUpperCase(), "roleTest.toString() does not work properly!");
     }
 
 }

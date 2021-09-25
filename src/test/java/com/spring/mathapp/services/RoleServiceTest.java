@@ -8,9 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import javax.transaction.Transactional;
-
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -20,13 +20,21 @@ class RoleServiceTest {
 
     private Role role;
 
+    private Role role2;
+
+    private List<Role> roleList;
+
     @Autowired
     RoleService roleService;
 
     @BeforeEach
     void setUp() {
         role = new Role("testRole");
-        roleService.save(role);
+        role2 = new Role("newTestRole");
+
+        roleList = new ArrayList<>(Arrays.asList(role, role2));
+
+        roleService.saveAll(roleList);
     }
 
     @Test
@@ -40,7 +48,7 @@ class RoleServiceTest {
     }
 
     @Test
-    void findRoleByName(){
+    void findRoleByName() {
         Role userRoleTest = roleService.findRoleByName("testRole");
 
         assertNotNull(userRoleTest, "Cannot find role by name!");
@@ -52,7 +60,7 @@ class RoleServiceTest {
     }
 
     @Test
-    void setDefaultRoles(){
+    void setDefaultRoles() {
         roleService.setDefaultRoles();
 
         Role userRole = roleService.findRoleByName("USER");
@@ -61,7 +69,7 @@ class RoleServiceTest {
 
         List<Role> defaultRoles = List.of(userRole, editorRole, adminRole);
 
-        assertNotNull(defaultRoles,"dsads");
+        assertNotNull(defaultRoles, "dsads");
     }
 
     @Test
@@ -69,6 +77,16 @@ class RoleServiceTest {
         long id = role.getId();
         roleService.deleteById(id);
         assertThrows(MyRoleNotFoundException.class, () -> roleService.findById(id), "Failed to delete Role!");
+    }
+
+    @Test
+    void deleteAll() {
+        roleService.deleteAll(roleService.findAll());
+
+        assertThrows(MyRoleNotFoundException.class, () -> List.of(roleService.findById(role.getId()),
+                roleService.findById(role2.getId())), "Failed to delete roles!");
+
+
     }
 
 

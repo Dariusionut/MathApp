@@ -31,7 +31,7 @@ public class RoleController implements IController<Role> {
     }
 
     @Override
-    @GetMapping(value = "/new")
+    @GetMapping(value = "/add")
     public String getForm(Model model) {
         model.addAttribute("role", new Role());
         model.addAttribute("users", userService.findAll());
@@ -44,7 +44,7 @@ public class RoleController implements IController<Role> {
     @GetMapping(value = "/edit/{id}")
     public String getEditForm(@PathVariable("id") Long id, Model model) {
         model.addAttribute("role", roleService.findById(id));
-        model.addAttribute("users", userService.findAll());
+//        model.addAttribute("users", userService.findAll());
         model.addAttribute("title", "Edit Role");
         return "role/role_form";
     }
