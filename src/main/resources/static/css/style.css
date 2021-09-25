@@ -173,6 +173,10 @@ header .navigation.user-principal {
     background-color: #000;
 }
 
+.round-button{
+    border-radius: 50%;
+}
+
 
 
 

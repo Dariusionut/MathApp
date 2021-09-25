@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="~{fragments/main :: head}"></head>
+<body>
+<header th:replace="~{fragments/main :: header}"></header>
+<section class="hero" th:style="'background: url(/images/hero.jpg) no-repeat center ; background-size:cover;'">
+    <section class="container" style="position: relative; z-index: 1">
+        <h3 class="mb-5">Country List</h3>
+        <hr>
+
+        <a th:href="@{/country/add}" class="btn btn-primary btn-sm round-button mb-3 mr-5">
+            <i class="fas fa-plus fa-3x"></i></a>
+
+        <a sec:authorize="hasRole('ADMIN')" th:href="@{/country/deleteAll}" style="float: right"
+           class="btn btn-danger fa-1x mb-3"
+           onclick="if(!(confirm('WARNING! THIS ACTION WILL DELETE ALL COUNTRIES!'))) return false">
+            <i class="fas fa-exclamation-circle"></i></a>
+        <table class="table table-striped table-bordered table-hover table-dark">
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <tr th:each="country : ${countryList}">
+                <td th:text="${country.id}"></td>
+                <td th:text="${country.name}"></td>
+                <td th:text="${country.description}"></td>
+
+                <td style="width: 15rem">
+                    <a sec:authorize="hasAnyRole('EDITOR, ADMIN')" th:href="@{'/country/edit/' + ${country.id}}"
+                       class="btn btn-success fa-1x"><i class="fas fa-edit"></i></a>
+                    <a sec:authorize="hasRole('ADMIN')" th:href="@{'/country/delete/' + ${country.id}}"
+                       class="btn btn-danger fa-1x"
+                       onclick="if(!(confirm('Are you sure to delete this country?'))) return false">
+                        <i class="fas fa-trash-alt"></i></a>
+
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+    </section>
+
+    <footer th:replace="~{fragments/main :: footer}"></footer>
+
+</section>
+
+<script src="/js/script.js"></script>
+</body>
+</html>
