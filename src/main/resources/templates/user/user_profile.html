@@ -7,9 +7,18 @@
 <header th:replace="~{fragments/main :: header}"></header>
 <section class="hero" th:style="'background: url(/images/hero.jpg) no-repeat center ; background-size:cover;'">
     <section class="container" style="position: relative; z-index: 1">
-        <h3>[[${#request.userPrincipal.principal.username}]]'s profile</h3>
-
+        <h3 th:unless="${user.id == null}">[[${user.userName}]]'s profile</h3>
         <hr>
+        <ul>
+            <li>Full name: [[${user.fullName}]]</li>
+            <li>Age: [[${user.age}]]</li>
+            <li>Email: [[${user.email}]]</li>
+            <li th:if="${user.country.getName() == 'Romania'}">Nationality: Romanian</li>
+            <li th:if="${user.country.getName() == 'United Kingdom'}">Nationality: British</li>
+            <div style="max-width: 70rem">
+                <li>Details: [[${user.details.info}]]</li>
+            </div>
+        </ul>
 
 
     </section>

@@ -38,6 +38,7 @@ public class User {
     @Column(length = 25, nullable = false)
     @NonNull
     private String firstName;
+
     @Column(length = 25, nullable = false)
     @NonNull
     private String lastName;
@@ -53,6 +54,10 @@ public class User {
 
     @OneToOne(mappedBy = "user", cascade = ALL, fetch = FetchType.LAZY, orphanRemoval = true)
     private Details details;
+
+    @ManyToOne(cascade = {REFRESH, DETACH, MERGE, PERSIST}, fetch = FetchType.LAZY)
+    @JoinColumn(name = "country_id")
+    private Country country;
 
     @ManyToMany(cascade = {DETACH, REFRESH, PERSIST, MERGE}, fetch = FetchType.EAGER)
     @JoinTable(name = "User_Role",

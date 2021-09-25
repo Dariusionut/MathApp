@@ -10,9 +10,9 @@ import org.springframework.util.Assert;
 
 import javax.transaction.Transactional;
 import java.time.LocalDate;
-import java.time.Month;
 import java.util.List;
 
+import static java.time.Month.JUNE;
 import static org.junit.jupiter.api.Assertions.*;
 
 @Transactional
@@ -21,7 +21,7 @@ class UserServiceTest {
 
     private User user;
     private User user2;
-    LocalDate age = LocalDate.of(1990, Month.JUNE, 22);
+    LocalDate age = LocalDate.of(1990, JUNE, 22);
 
     @Autowired
     private UserService userService;
@@ -93,7 +93,7 @@ class UserServiceTest {
         userService.deleteAll(userService.findAll());
 
         assertThrows(UserNotFoundException.class, () -> List.of(userService.findById(user.getId()),
-                userService.findById(user2.getId())), "Cannot delete user2!");
+                userService.findById(user2.getId())), "Cannot delete users!");
 
     }
 

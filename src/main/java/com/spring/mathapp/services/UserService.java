@@ -45,8 +45,6 @@ public class UserService extends MyService<User, UserRepository> {
             user.addDetails("Details");
         }
 
-        roleService.setDefaultRoles();
-
         if (user.getRoles() == null) {
             Role userRole = roleService.findRoleByName("USER");
             if (userRole != null) {

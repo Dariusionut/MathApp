@@ -22,26 +22,26 @@
 
         <nav sec:authorize="isAuthenticated()" class="navigation user-principal">
             <div class="dropdown-button">
-                <a th:href="@{'/users/profile/' + ${#httpServletRequest.userPrincipal.getName()}}" class="dropbtn">
-                    <i class="fas fa-user"></i> [[${#request.userPrincipal.principal.username}]]</a>
+                <a th:href="@{'/users/profile/' + ${#httpServletRequest.userPrincipal.getName()}}" class="dropbtn"
+                   title="Profile"><i class="fas fa-user"></i> [[${#request.userPrincipal.principal.username}]]</a>
                 <div class="dropdown-content">
                     <a sec:authorize="isAuthenticated()" th:href="@{/logout}" title="Sign out"
                        onclick="if (!(confirm('Are you sure to sign out?'))) return false"><i
                             class="fas fa-door-open"></i> Sign Out</a>
-                    <a th:href="@{'/users/update/' + ${#httpServletRequest.userPrincipal.getName()}}">
-                        <i class="fas fa-cog"> Edit profile</i></a>
+                    <a th:href="@{'/users/update/' + ${#httpServletRequest.userPrincipal.getName()}}"
+                       title="Edit profile"><i class="fas fa-cog"> Edit profile</i></a>
                 </div>
 
             </div>
-
 
         </nav>
     </nav>
 
 
     <nav class="navigation">
-        <a sec:authorize="isAuthenticated()" th:href="@{/users}"><i class="fas fa-users"></i></a>
-        <a sec:authorize="hasRole('ADMIN')" th:href="@{/roles}"><i class="fas fa-cog"></i></a>
+        <a sec:authorize="isAuthenticated()" th:href="@{/users}" title="Users"><i class="fas fa-users"></i></a>
+        <a sec:authorize="hasRole('ADMIN')" th:href="@{/roles}" title="Manage roles"><i class="fas fa-cog"></i></a>
+        <a sec:authorize="hasAnyRole('ADMIN, EDITOR')" th:href="@{/country/all}" title="Countries"><i class="fas fa-flag"></i></a>
 
         <a sec:authorize="isAnonymous()" th:href="@{/login}" title="Login"><i class="fas fa-sign-in-alt"></i></a>
         <a sec:authorize="isAnonymous()" th:href="@{/users/register}" title="New Account"><i

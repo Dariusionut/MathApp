@@ -69,6 +69,19 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
                           class="form-control col-4"></textarea>
             </div>
 
+            <div class="mb-3">
+                <label for="country">Country</label>
+
+                <select th:field="*{country}" id="country" class="form-control col-4">
+
+                    <option th:each="country : ${countries}"
+                            th:value="${country.id}"
+                            th:text="${country.name}">
+                    </option>
+
+                </select>
+            </div>
+
             <div sec:authorize="hasAnyRole('ADMIN, EDITOR')" class="mb-3">
                 <label for="roles">Role</label>
 

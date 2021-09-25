@@ -1,6 +1,7 @@
 package com.spring.mathapp.controllers;
 
 import com.spring.mathapp.models.User;
+import com.spring.mathapp.services.CountryService;
 import com.spring.mathapp.services.RoleService;
 import com.spring.mathapp.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,9 @@ public class UserController {
     @Autowired
     RoleService roleService;
 
+    @Autowired
+    CountryService countryService;
+
     @GetMapping(value = "")
     @PreAuthorize("isAuthenticated()")
     public String getAllUsers(Model model) {
@@ -32,6 +36,7 @@ public class UserController {
     public String getRegistrationForm(Model model) {
         model.addAttribute("user", new User());
         model.addAttribute("roles", roleService.findAll());
+        model.addAttribute("countries", countryService.findAll());
         model.addAttribute("title", "Register User");
 
         return "user/user_form";
@@ -42,6 +47,7 @@ public class UserController {
     public String getUserEditForm(@PathVariable("id") Long id, Model model) {
         model.addAttribute("user", userService.findById(id));
         model.addAttribute("roles", roleService.findAll());
+        model.addAttribute("countries", countryService.findAll());
         model.addAttribute("title", "Edit User");
 
         return "user/user_form";

@@ -6,9 +6,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.time.LocalDate;
-import java.time.Month;
 import java.util.Set;
 
+import static java.time.Month.JUNE;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
@@ -20,7 +20,7 @@ class UserTest {
 
     @BeforeEach
     void setUp() {
-        LocalDate age = LocalDate.of(1990, Month.JUNE, 22);
+        LocalDate age = LocalDate.of(1990, JUNE, 22);
         userDetails = new Details();
         userDetails.setId(1L);
         userDetails.setInfo("testDetails!");
@@ -30,7 +30,7 @@ class UserTest {
         userRole.setName("testRole");
 
         user = new User(1L, "testUsername", "testPass", "test@test.com",
-                "firstNameTest", "lastNameTest", age, null, true, userDetails, Set.of(userRole));
+                "firstNameTest", "lastNameTest", age, null, true, userDetails, null, Set.of(userRole));
 
     }
 
