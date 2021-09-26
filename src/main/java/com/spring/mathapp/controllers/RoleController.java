@@ -64,10 +64,4 @@ public class RoleController implements IController<Role> {
         return "redirect:/roles";
     }
 
-    @GetMapping(value = "/search")
-    public String search(@RequestParam("name") String name, Model model) {
-        model.addAttribute("role", roleService.searchBy(name));
-
-        return "role/role_list";
-    }
 }

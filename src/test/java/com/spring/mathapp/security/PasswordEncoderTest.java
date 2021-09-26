@@ -20,8 +20,7 @@ public class PasswordEncoderTest {
     @BeforeEach
     void setUp() {
         encoder = new BCryptPasswordEncoder();
-        user = new User("test", "rawPassword", "test@test.com", "fTest", "lTest",
-                LocalDate.of(1996, Month.JULY, 26));
+        user = new User("test", "rawPassword", "test@test.com", "fTest", "lTest");
 
     }
 

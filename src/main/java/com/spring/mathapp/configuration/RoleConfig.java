@@ -10,8 +10,7 @@ class RoleConfig {
 
     @Bean
     CommandLineRunner roleRunner(RoleService roleService) {
-        return args -> {
-            roleService.setDefaultRoles();
-        };
+        return args -> roleService.setDefaultRoles();
+
     }
 }

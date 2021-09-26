@@ -58,6 +58,7 @@ public class UserController {
     public String editUser(@PathVariable("userName") String userName, Model model) {
         model.addAttribute("user", userService.findByUsername(userName));
         model.addAttribute("roles", roleService.findAll());
+        model.addAttribute("countries", countryService.findAll());
         model.addAttribute("title", "Edit User");
 
         return "user/user_form";

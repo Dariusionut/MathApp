@@ -62,10 +62,4 @@ public class CountryController implements IController<Country> {
         return "redirect:/country/all";
     }
 
-    @GetMapping(value = "/search" )
-    @PreAuthorize("isAuthenticated()")
-    public String search(@RequestParam("countryName") String name, Model model) {
-        model.addAttribute("userList", countryService.searchBy(name));
-        return "/country/country_list";
-    }
 }

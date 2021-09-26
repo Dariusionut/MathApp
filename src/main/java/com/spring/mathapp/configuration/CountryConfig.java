@@ -10,10 +10,7 @@ public class CountryConfig {
 
     @Bean
     CommandLineRunner countryRunner(CountryService countryService) {
-        return args -> {
+        return args -> countryService.setDefaultCountries();
 
-            countryService.setDefaultCountries();
-
-        };
     }
 }

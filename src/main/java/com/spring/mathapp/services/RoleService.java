@@ -54,13 +54,4 @@ public class RoleService extends MyService<Role, RoleRepository> {
         return super.getRepository().findRoleByName(roleName);
     }
 
-    public List<Role> searchBy(String name) {
-        List<Role> results;
-        if (name != null && name.trim().length() > 0) {
-            results = super.getRepository().findByNameContainsOrNameContainingAllIgnoreCase(name, name);
-        } else {
-            results = super.findAll();
-        }
-        return results;
-    }
 }

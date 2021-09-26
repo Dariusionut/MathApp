@@ -57,16 +57,22 @@ public class CustomUserDetails implements UserDetails, Serializable {
         return user.getFullName();
     }
 
+    public String getDetails() {
+        return user.getDetails().getInfo();
+    }
+
+    public String getInfo() {
+        return user.getDetails().getInfo();
+    }
+
     public LocalDate getDob() {
+
         return user.getDob();
     }
 
     public Integer getAge() {
-        return user.getAge();
-    }
 
-    public String getDetails() {
-        return user.getDetails().getInfo();
+        return user.getAge();
     }
 
     @Override

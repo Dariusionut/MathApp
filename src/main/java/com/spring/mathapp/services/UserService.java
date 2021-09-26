@@ -33,16 +33,14 @@ public class UserService extends MyService<User, UserRepository> {
     public void save(User user) {
         user.setEncodedPassword(user.getPassword());
         user.getFullName();
-        user.setAge(user.getAge());
-
         if (user.getIsEnabled() == null) {
             user.setIsEnabled(true);
         }
 
         if (user.getDetails() != null) {
-            user.addDetails(user.getDetails().getInfo());
+            user.addDetails(user.getDetails().getInfo(), user.getDetails().getDob());
         } else {
-            user.addDetails("Details");
+            user.addDetails("Details", null);
         }
 
         if (user.getRoles() == null) {
@@ -60,14 +58,14 @@ public class UserService extends MyService<User, UserRepository> {
 
         for (User user : users) {
             user.setEncodedPassword(user.getPassword());
-            user.setAge(user.getAge());
             if (user.getRoles() == null) {
                 Role userRole = roleService.findRoleByName("USER");
                 user.setRoles(Set.of(userRole));
             }
 
-            if (user.getDetails() == null) {
-                user.addDetails("Please fill up your details!");
+            if (user.getDetails().getInfo() == null) {
+                user.getDetails().setInfo("Please fill up your info!");
+
             }
 
             if (user.getIsEnabled() == null) {

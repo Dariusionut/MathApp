@@ -39,20 +39,28 @@ class UserConfig {
             Country countryUk = countryService.findCountryByName("United Kingdom");
 
             darius96 = new User(1L, "Darius96", "password", "dariustinculescu@gmail.com",
-                    "Darius", "Tinculescu", LocalDate.of(1996, JULY, 26), null,
+                    "Darius", "Tinculescu",
                     true, null, countryRo, Set.of(roleAdmin));
 
+            darius96.addDetails("ddd", LocalDate.of(1996, JULY, 26));
+
             alex98 = new User(2L, "Alex98", "password", "alex@gmail.com", "alex",
-                    "mihai", LocalDate.of(1993, JANUARY, 17), null, null,
+                    "mihai",null,
                     null, countryUk, null);
 
+            alex98.addDetails("sss", LocalDate.of(1990, JUNE, 22));
+
             bannedUser = new User(3L, "Banned-User", "password", "bannedUser@gmail.com",
-                    "Banned", "Banned", LocalDate.of(1998, OCTOBER, 27), null,
+                    "Banned", "Banned",
                     false, null, countryRo, null);
 
+            bannedUser.addDetails("fff", LocalDate.of(1998, JANUARY, 19));
+
             editorUser = new User(4L, "Editor", "password", "editor@gmail.com",
-                    "eDiToR", "editor", LocalDate.of(2001, MARCH, 11), null,
+                    "eDiToR", "editor",
                     null, null, countryUk, Set.of(roleEditor));
+
+            editorUser.addDetails("bbb", LocalDate.of(1999, DECEMBER, 11));
 
             List<User> defaultUsers = List.of(darius96, alex98, bannedUser, editorUser);
 

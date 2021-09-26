@@ -1,13 +1,10 @@
 package com.spring.mathapp.models;
 
 import lombok.*;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.persistence.*;
-
 import java.time.LocalDate;
-import java.time.Period;
 import java.util.Set;
 
 import static javax.persistence.CascadeType.*;
@@ -43,13 +40,6 @@ public class User {
     @NonNull
     private String lastName;
 
-    @Column(nullable = false)
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @NonNull
-    private LocalDate dob;
-
-    private Integer age;
-
     private Boolean isEnabled;
 
     @OneToOne(mappedBy = "user", cascade = ALL, fetch = FetchType.LAZY, orphanRemoval = true)
@@ -66,35 +56,37 @@ public class User {
     private Set<Role> roles;
 
     public User(@NonNull String userName, @NonNull String password, @NonNull String email, @NonNull String firstName,
-                @NonNull String lastName, @NonNull LocalDate dob, Integer age, Boolean isEnabled, Details details, Set<Role> roles) {
+                @NonNull String lastName, Boolean isEnabled, Details details, Set<Role> roles) {
         this.userName = userName;
         this.password = password;
         this.email = email;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.dob = dob;
-        this.age = age;
         this.isEnabled = isEnabled;
         this.details = details;
         this.roles = roles;
     }
 
-    public void addDetails(String info) {
-        this.setDetails(new Details(info, this));
+    public void addDetails(String info, LocalDate dob) {
+        this.setDetails(new Details(info, dob, this));
     }
 
-    public void updateDetails(Long id, String info) {
-        this.setDetails(new Details(id, info, this));
-    }
-
-    public Integer getAge() {
-        return Period.between(this.dob, LocalDate.now()).getYears();
+    public void updateDetails(Long id, String info, LocalDate dob) {
+        this.setDetails(new Details(id, info, dob, null, this));
     }
 
     public String getFullName() {
         this.setFirstName(this.getFirstName().substring(0, 1).toUpperCase() + this.getFirstName().substring(1).toLowerCase());
         this.setLastName(this.getLastName().substring(0, 1).toUpperCase() + this.getLastName().substring(1).toLowerCase());
         return this.firstName + " " + this.lastName;
+    }
+
+    public Integer getAge() {
+        return this.getDetails().getAge();
+    }
+
+    public LocalDate getDob(){
+        return this.getDetails().getDob();
     }
 
     public void setEncodedPassword(String rawPassword) {

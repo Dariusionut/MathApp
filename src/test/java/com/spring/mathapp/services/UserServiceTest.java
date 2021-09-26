@@ -1,6 +1,7 @@
 package com.spring.mathapp.services;
 
 import com.spring.mathapp.exceptions.UserNotFoundException;
+import com.spring.mathapp.models.Details;
 import com.spring.mathapp.models.User;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -12,7 +13,8 @@ import javax.transaction.Transactional;
 import java.time.LocalDate;
 import java.util.List;
 
-import static java.time.Month.JUNE;
+import static java.time.LocalDate.of;
+import static java.time.Month.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 @Transactional
@@ -21,7 +23,8 @@ class UserServiceTest {
 
     private User user;
     private User user2;
-    LocalDate age = LocalDate.of(1990, JUNE, 22);
+    private User user3;
+    LocalDate age = of(1990, JUNE, 22);
 
     @Autowired
     private UserService userService;
@@ -30,21 +33,26 @@ class UserServiceTest {
     void setUp() {
 
         user = new User("userTest", "passTest", "test@gmail.com", "nameTest",
-                "lNameTest", age, null, null, null, null);
+                "lNameTest",null, null, null);
+
+        user.addDetails("detailsTest", of(1990, JULY, 20));
 
         user2 = new User("user2Test", "pass2Test", "test2@gmail.com", "name2Test",
-                "lName2Test", age, null, null, null, null);
+                "lName2Test", null, null, null);
+
+        user2.addDetails("detailsTest", of(1994, JANUARY, 14));
 
         userService.saveAll(List.of(user, user2));
     }
 
     @Test
     void save() {
-        User testUser = new User("testMyUser", "pass", "testing@test.test", "test",
-                "test", age, null, null, null, null);
-        userService.save(testUser);
+        user3 = new User("testMyUser", "pass", "testing@test.test", "test",
+                "test",null, new Details("test", of(1992, JANUARY, 22), user3 ),
+                null);
+        userService.save(user3);
 
-        assertNotNull(testUser, "Cannot save user!");
+        assertNotNull(user3, "Cannot save user!");
     }
 
     @Test
