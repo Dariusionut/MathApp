@@ -46,7 +46,7 @@ class DetailsServiceTest {
     }
 
     @Test
-    void deleteUserById() {
+    void deleteDetailById() {
         long id = userDetails.getId();
         detailsService.deleteById(id);
         assertThrows(UserDetailsNotFoundException.class, () -> detailsService.findById(id), "Failed to delete User Details!");

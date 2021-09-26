@@ -26,5 +26,9 @@ public class Country {
     @OneToMany(mappedBy = "country", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     List<User> users;
 
-
+    public Country(@NonNull String name, @NonNull String description, List<User> users) {
+        this.name = name;
+        this.description = description;
+        this.users = users;
+    }
 }

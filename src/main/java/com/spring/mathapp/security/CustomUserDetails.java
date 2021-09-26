@@ -66,12 +66,10 @@ public class CustomUserDetails implements UserDetails, Serializable {
     }
 
     public LocalDate getDob() {
-
         return user.getDob();
     }
 
     public Integer getAge() {
-
         return user.getAge();
     }
 

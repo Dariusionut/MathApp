@@ -48,7 +48,7 @@ class UserConfig {
                     "mihai",null,
                     null, countryUk, null);
 
-            alex98.addDetails("sss", LocalDate.of(1990, JUNE, 22));
+            alex98.addDetails("details", LocalDate.of(1990, JUNE, 22));
 
             bannedUser = new User(3L, "Banned-User", "password", "bannedUser@gmail.com",
                     "Banned", "Banned",

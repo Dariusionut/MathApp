@@ -7,9 +7,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.util.Assert;
 
-import java.time.LocalDate;
-import java.time.Month;
-
 @SpringBootTest
 public class PasswordEncoderTest {
 

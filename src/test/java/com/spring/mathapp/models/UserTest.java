@@ -6,6 +6,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.time.LocalDate;
+import java.util.Objects;
 import java.util.Set;
 
 import static java.time.Month.*;
@@ -15,15 +16,13 @@ import static org.junit.jupiter.api.Assertions.*;
 class UserTest {
 
     User user;
-    Details userDetails;
+
     Role userRole;
 
     @BeforeEach
     void setUp() {
-        LocalDate age = LocalDate.of(1990, JUNE, 22);
-        userDetails = new Details();
-        userDetails.setId(1L);
-        userDetails.setInfo("testDetails!");
+        LocalDate dob = LocalDate.of(1990, JUNE, 22);
+        Details userDetails = new Details(1L, "Test info", dob, null, user);
 
         userRole = new Role();
         userRole.setId(1L);
@@ -84,6 +83,16 @@ class UserTest {
     }
 
     @Test
+    void getAge() {
+        assertNotNull(user.getAge(), "Cannot get user's age!");
+    }
+
+    @Test
+    void getDob() {
+        assertNotNull(user.getDob(), "Cannot get user's dob!");
+    }
+
+    @Test
     void getRole() {
         assertNotNull(user.getRoles(), "Cannot get user's role!");
     }
@@ -107,7 +116,7 @@ class UserTest {
     }
 
     @Test
-     void setEncodedPassword() {
+    void setEncodedPassword() {
         String rawPassword = user.getPassword();
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         user.setEncodedPassword(user.getPassword());
@@ -160,9 +169,9 @@ class UserTest {
 
     @Test
     void updateDetails() {
-
         user.updateDetails(1L, "updateDetailsTest", LocalDate.of(1990, JANUARY, 22));
-        assertTrue(user.getId() == 1L && user.getDetails().getInfo() == "updateDetailsTest", "Cannot update details!");
+        assertTrue(user.getId() == 1L && Objects.equals(user.getDetails().getInfo(), "updateDetailsTest"),
+                "Cannot update details!");
     }
 
     @Test

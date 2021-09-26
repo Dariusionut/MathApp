@@ -1,8 +1,10 @@
 package com.spring.mathapp.services;
 
 import com.spring.mathapp.exceptions.UserNotFoundException;
+import com.spring.mathapp.models.Country;
 import com.spring.mathapp.models.Role;
 import com.spring.mathapp.models.User;
+import com.spring.mathapp.repositories.CountryRepository;
 import com.spring.mathapp.repositories.UserDetailsRepository;
 import com.spring.mathapp.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +21,8 @@ public class UserService extends MyService<User, UserRepository> {
     UserDetailsRepository detailsRepository;
     @Autowired
     RoleService roleService;
+    @Autowired
+    CountryRepository countryRepository;
 
     @Override
     public User findById(Long id) {

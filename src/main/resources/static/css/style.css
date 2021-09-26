@@ -1,36 +1,16 @@
-html {
-    font-size: 10px;
-    font-family: 'baloo 2', cursive;
-    font-weight: 300;
-}
+html { font-size: 10px; font-family: 'baloo 2', cursive; font-weight: 300; }
 
-* {
-    box-sizing: border-box
-}
+* { box-sizing: border-box }
 
-body {
-    margin: 0;
-}
+body { margin: 0; }
 
-.greetings {
-    user-select: none;
-    position: relative;
-    z-index: 1;
-    text-align: center;
-}
+.greetings { user-select: none; position: relative; z-index: 1; text-align: center; }
 
-.greetings > .welcome{
-    font-size: 5rem;
-}
+.greetings > .welcome{ font-size: 5rem; }
 
-.greetings > .welcome-user{
-    font-size: 3.5rem;
-}
+.greetings > .welcome-user{ font-size: 3.5rem; }
 
-.banned{
-    cursor: not-allowed;
-    color: #b20000;
-}
+.banned{ cursor: not-allowed; color: #b20000; }
 
 header {
     position: fixed;
@@ -47,47 +27,22 @@ header {
     user-select: none;
 }
 
-header .logo {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
+header .logo { display: flex; justify-content: space-between; align-items: center;}
 
-header + * {
-    color: wheat;
-    text-decoration: none;
-    font-size: 2.5rem;
-    margin-top: 8rem;
-}
+header + * { color: wheat; text-decoration: none; font-size: 2.5rem; margin-top: 8rem; }
 
-header > .logo img {
-    border-radius: 50%;
-    height: 7.5rem;
-}
+header > .logo img { border-radius: 50%; height: 7.5rem;}
 
-header .navigation.user-principal {
-    margin-left: 3.5rem;
-}
+header .navigation.user-principal { margin-left: 3.5rem; }
 
-.navigation a {
-    font-size: 3rem;
-    margin-left: 2.5rem;
-    text-decoration: none;
-    color: wheat;
-}
+.navigation a { font-size: 3rem; margin-left: 2.5rem; text-decoration: none; color: wheat;}
 
-.navigation a:visited {
-    color: wheat;
-}
+.navigation a:visited {color: wheat;}
 
- header a:hover {
-    opacity: 70%;
-}
+ header a:hover {opacity: 70%;}
 
 @media (max-width: 580px) {
-    header {
-        padding: 0.75rem 2.5rem;
-    }
+    header { padding: 0.75rem 2.5rem; }
 
     .navigation > * {
         display: inline-block;
@@ -96,13 +51,7 @@ header .navigation.user-principal {
     }
 }
 
-.hero {
-    display: flex;
-    color: wheat;
-    height: calc(100vh - 8rem);
-    align-items: center;
-    justify-content: center;
-}
+.hero { display: flex; color: wheat; height: calc(100vh - 8rem); align-items: center; justify-content: center;}
 
 .hero::before {
     content: "";
@@ -112,25 +61,15 @@ header .navigation.user-principal {
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.65);
-
 }
 
-.hero > div > h2 {
-    font-size: 5rem;
-    user-select: none;
-}
+.hero > div > h2 { font-size: 5rem; user-select: none;}
 
-.container > h3 {
-    font-size: 2.5rem;
-}
+.container > h3 { font-size: 2.5rem;}
 
-.form-control {
-    font-size: 1.7rem;
-}
+.form-control { font-size: 1.7rem;}
 
-.login-form{
-    font-size: 3.5rem;
-}
+.login-form{ font-size: 3.5rem;}
 
 .dropdown-button {
     position: relative;
@@ -176,6 +115,7 @@ header .navigation.user-principal {
 .round-button{
     border-radius: 50%;
 }
+
 
 
 

@@ -10,11 +10,11 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.util.Assert;
 
 import javax.transaction.Transactional;
-import java.time.LocalDate;
 import java.util.List;
 
 import static java.time.LocalDate.of;
-import static java.time.Month.*;
+import static java.time.Month.JANUARY;
+import static java.time.Month.JULY;
 import static org.junit.jupiter.api.Assertions.*;
 
 @Transactional
@@ -24,7 +24,6 @@ class UserServiceTest {
     private User user;
     private User user2;
     private User user3;
-    LocalDate age = of(1990, JUNE, 22);
 
     @Autowired
     private UserService userService;
@@ -43,6 +42,7 @@ class UserServiceTest {
         user2.addDetails("detailsTest", of(1994, JANUARY, 14));
 
         userService.saveAll(List.of(user, user2));
+
     }
 
     @Test

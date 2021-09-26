@@ -8,81 +8,76 @@
 <section class="hero" th:style="'background: url(/images/hero.jpg) no-repeat center ; background-size:cover;'">
     <section class="container" style="position: relative; z-index: 1">
 
-            <h3 class="mb-5">User List</h3>
-            <hr>
-            <form th:action="@{/users/search}" class="form-inline" style="float: left">
-                <section class="fa-1x">
-                    <input class="form-control mr-sm-2 mb-3" type="search" name="userName"
-                           placeholder="Search by name"/>
+        <h3 class="mb-5">User List</h3>
+        <hr>
+        <form th:action="@{/users/search}" class="form-inline" style="float: left">
+            <section class="fa-1x">
+                <input class="form-control mr-sm-2 mb-3" type="search" name="userName"
+                       placeholder="Search by name"/>
 
-                    <button class="btn btn-success mb-3 " type="submit"><i class="fas fa-search fa-2x"></i></button>
-                </section>
+                <button class="btn btn-success mb-3 " type="submit"><i class="fas fa-search fa-2x"></i></button>
+            </section>
 
-            </form>
+        </form>
 
-            <a sec:authorize="hasRole('ADMIN')" th:href="@{/users/deleteAll}" style="float: right"
-               class="btn btn-danger fa-1x mb-3"
-               onclick="if(!(confirm('WARNING! THIS ACTION WILL DELETE ALL USERS!'))) return false">
-                <i class="fas fa-exclamation-circle"></i></a>
-
-
-            <table class="table table-striped table-bordered table-hover table-dark">
-                <thead>
-                <tr>
-                    <th>Id</th>
-                    <th>Username</th>
-                    <th>Email</th>
-                    <th>Full name</th>
-                    <th>Age</th>
-                    <th>Info</th>
-                    <th>Country</th>
-                    <th>Role(s)</th>
-                    <th>Action</th>
-                </tr>
-                </thead>
-
-                <tbody>
-                <tr th:each="user : ${userList}">
-                    <td th:text="${user.id}"></td>
-
-                    <td th:if="${user.getIsEnabled() == true}" th:text="${user.userName}"></td>
-                    <td th:unless="${user.getIsEnabled() == true}" class="banned"><i class="fas fa-ban"> <span
-                            style="text-decoration: line-through">[[${user.userName}]] </span> </i></td>
-
-                    <td th:text="${user.email}"></td>
-                    <td th:text="${user.fullName}"></td>
-                    <td th:text="${user.age}"></td>
-
-                    <th:block sec:authorize="permitAll()">
-                    <td th:if="${user.details.info.length() > 15 && user.getIsEnabled() == true}">
-                        [[${user.details.info.substring(0, 7)}]]
-                        <span th:title="${'Check ' + user.userName + ' profile to view full details! '}">(...)</span></td>
-                    <td th:if="${user.details.info.length() <= 15 && user.getIsEnabled() == true}" th:text="${user.details.info}"></td>
-                    <td th:unless="${user.getIsEnabled() == true}" th:text="BANNED" class="banned"></td>
-                    <td th:text="${user.country.name}"></td>
-                    </th:block>
+        <a sec:authorize="hasRole('ADMIN')" th:href="@{/users/deleteAll}" style="float: right"
+           class="btn btn-danger fa-1x mb-3"
+           onclick="if(!(confirm('WARNING! THIS ACTION WILL DELETE ALL USERS!'))) return false">
+            <i class="fas fa-exclamation-circle"></i></a>
 
 
-                    <td>
-                        <section th:each="role : ${user.roles}">
-                            <span th:if="${user.roles.isEmpty()}" th:text="No role assigned!"></span>
-                            <span th:if="${user.roles.size() == 1}" th:text="${role.name}"></span>
-                            <span th:if="${user.roles.size() > 1}" th:text="${role.name} + '; '"></span>
-                        </section>
-                    </td>
+        <table class="table table-striped table-bordered table-hover table-dark">
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>Username</th>
+                <th>Email</th>
+                <th>Full name</th>
+                <th>Age</th>
+                <th>Country</th>
+                <th>Role(s)</th>
+                <th>Action</th>
+            </tr>
+            </thead>
 
-                    <td>
-                        <a sec:authorize="hasAnyRole('EDITOR, ADMIN')" th:href="@{'/users/edit/' + ${user.id}}"
-                           class="btn btn-success fa-1x"><i class="fas fa-edit"></i></a>
-                        <a sec:authorize="hasRole('ADMIN')" th:href="@{'/users/delete/' + ${user.id}}"
-                           class="btn btn-danger fa-1x"
-                           onclick="if(!(confirm('Are you sure to delete this user?'))) return false">
-                            <i class="fas fa-trash-alt"></i></a>
+            <tbody>
+            <tr th:each="user : ${userList}">
+                <td th:text="${user.id}"></td>
 
-                    </td>
-                </tr>
-                </tbody>
-            </table>
+                <td th:if="${user.getIsEnabled() == true}" th:text="${user.userName}"></td>
+                <td th:unless="${user.getIsEnabled() == true}" class="banned"><i class="fas fa-ban"> <span
+                        style="text-decoration: line-through" th:title="${user.userName + ' is banned'}">
+                    [[${user.userName}]] </span> </i></td>
+
+                <td th:text="${user.email}"></td>
+                <td th:text="${user.fullName}"></td>
+                <td th:text="${user.age}"></td>
+
+                <td th:text="${user.country.name}"></td>
+
+                <td>
+                    <section th:each="role : ${user.roles}">
+                        <span th:if="${user.roles.isEmpty()}" th:text="No role assigned!"></span>
+                        <span th:if="${user.roles.size() == 1}" th:text="${role.name}"></span>
+                        <span th:if="${user.roles.size() > 1}" th:text="${role.name} + '; '"></span>
+                    </section>
+                </td>
+
+                <td style="width: 25rem">
+                    <a sec:authorize="isAuthenticated()" th:href="@{'/users/profile/' + ${user.userName}}"
+                       th:title="${user.userName + '`s profile'}" class="btn btn-info fa-1x"><i class="fas fa-user"></i></a>
+                    <a sec:authorize="hasAnyRole('EDITOR, ADMIN')" th:href="@{'/users/edit/' + ${user.id}}"
+                       th:title="${'Edit ' + user.userName}" class="btn btn-success fa-1x"><i
+                            class="fas fa-edit"></i></a>
+                    <a sec:authorize="hasRole('ADMIN')" th:href="@{'/users/delete/' + ${user.id}}"
+                       th:title="${'Delete ' + user.userName}" class="btn btn-danger fa-1x"
+                       onclick="if(!(confirm('Are you sure to delete this user?'))) return false">
+                        <i class="fas fa-trash-alt"></i></a>
+
+                </td>
+            </tr>
+            </tbody>
+        </table>
 
     </section>
 

@@ -53,6 +53,15 @@ public class UserController {
         return "user/user_form";
     }
 
+    @GetMapping(value = "/profile/{userName}")
+    @PreAuthorize("isAuthenticated()")
+    public String getUserProfile(@PathVariable("userName") String userName, Model model) {
+        model.addAttribute("user", userService.findByUsername(userName));
+        model.addAttribute("title", "Profile");
+
+        return "user/user_profile";
+    }
+
     @GetMapping(value = "/update/{userName}")
     @PreAuthorize("#userName == principal.username")
     public String editUser(@PathVariable("userName") String userName, Model model) {
@@ -92,15 +101,6 @@ public class UserController {
     public String search(@RequestParam("userName") String name, Model model) {
         model.addAttribute("userList", userService.searchBy(name));
         return "/user/user_list";
-    }
-
-    @GetMapping(value = "/profile/{userName}")
-    @PreAuthorize("#userName == principal.username")
-    public String getUserProfile(@PathVariable("userName") String userName, Model model) {
-        model.addAttribute("user", userService.findByUsername(userName));
-        model.addAttribute("title", "Profile");
-
-        return "user/user_profile";
     }
 
 }

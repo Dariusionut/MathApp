@@ -56,6 +56,21 @@ class CustomUserDetailsTest {
     }
 
     @Test
+    void getInfo() {
+        Assert.notNull(customUserDetails.getInfo(), "Cannot get info!");
+    }
+
+    @Test
+    void getDob() {
+        Assert.notNull(customUserDetails.getDob(), "Cannot get date of birth!");
+    }
+
+    @Test
+    void getAge() {
+        Assert.notNull(customUserDetails.getAge(), "Cannot get age!");
+    }
+
+    @Test
     void isAccountNonExpired() {
         Assert.isTrue(customUserDetails.isAccountNonExpired(), "Account is expired!");
     }
