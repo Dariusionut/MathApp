@@ -13,6 +13,8 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
         <form th:action="@{/users/save}" method="post" th:object="${user}" enctype="multipart/form-data">
             <input type="hidden" th:field="*{id}">
+            <input type="hidden" th:field="*{details.id}">
+
             <div class="mb-3">
                 <label for="username">Username</label>
                 <input type="text" th:field="*{userName}" id="username" placeholder="Username" value="Darius" required

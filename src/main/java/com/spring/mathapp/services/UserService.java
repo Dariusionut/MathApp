@@ -42,7 +42,7 @@ public class UserService extends MyService<User, UserRepository> {
         }
 
         if (user.getDetails() != null) {
-            user.addDetails(user.getDetails().getInfo(), user.getDetails().getDob());
+            user.updateDetails(user.getDetails().getId(), user.getDetails().getInfo(), user.getDetails().getDob());
         } else {
             user.addDetails("Details", null);
         }
