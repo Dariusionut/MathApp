@@ -10,6 +10,15 @@ import java.util.Optional;
 @Service
 public class DetailsService extends MyService<Details, UserDetailsRepository> {
 
+
+    @Override
+    public void save(Details details) {
+
+        details.setAge(details.getAge());
+
+        super.save(details);
+    }
+
     @Override
     public Details findById(Long id) throws UserDetailsNotFoundException {
         return super.getRepository().findById(id).orElseThrow(() -> new UserDetailsNotFoundException("User details not found!"));

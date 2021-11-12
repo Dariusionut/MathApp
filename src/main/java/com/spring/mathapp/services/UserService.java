@@ -37,6 +37,7 @@ public class UserService extends MyService<User, UserRepository> {
     public void save(User user) {
         user.setEncodedPassword(user.getPassword());
         user.getFullName();
+        user.getDetails().setAge(user.getAge());
         if (user.getIsEnabled() == null) {
             user.setIsEnabled(true);
         }

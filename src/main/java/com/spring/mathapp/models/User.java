@@ -72,7 +72,7 @@ public class User {
     }
 
     public void updateDetails(Long id, String info, LocalDate dob) {
-        this.setDetails(new Details(id, info, dob, null, this));
+        this.setDetails(new Details(id, info, dob, this));
     }
 
     public String getFullName() {
@@ -85,7 +85,7 @@ public class User {
         return this.getDetails().getAge();
     }
 
-    public LocalDate getDob(){
+    public LocalDate getDob() {
         return this.getDetails().getDob();
     }
 
